@@ -2,6 +2,7 @@ FROM ubuntu:focal as stage1-build
 MAINTAINER rhastie@nvidia.com
 LABEL maintainer="rhastie@nvidia.com"
 
+
 ARG makemt
 
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
@@ -27,7 +28,7 @@ RUN cd /home && mkdir certs && git config --global http.sslVerify false && \
     rm -rf /home/nmos-testing
 
 ## Get source for Sony nmos-cpp/
-ENV NMOS_CPP_VERSION=3a904a3fcc39057a8db74656a697f0d97d8a3651
+ENV NMOS_CPP_VERSION=3cb8aa0dffd616125287ee3e56bf52a7a2e4f0be
 RUN cd /home/ && curl --output - -s -k https://codeload.github.com/sony/nmos-cpp/tar.gz/$NMOS_CPP_VERSION | tar zxvf - -C . && \
     mv ./nmos-cpp-${NMOS_CPP_VERSION} ./nmos-cpp
 
