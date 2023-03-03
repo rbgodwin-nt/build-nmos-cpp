@@ -2,10 +2,10 @@ name: ci-build-test-publish
 
 on:
   push: 
-    branches: [dev, master]
+    branches: [ely, master]
 
   pull_request:
-    branches: [dev, master]
+    branches: [ely, master]
     
   workflow_dispatch:
 
@@ -309,7 +309,7 @@ jobs:
           dockerPassword: ${{ secrets.DockerHub_Password }}
 
       - name: Upload results to google sheets
-        if: env.TEST_FAIL == 'FALSE' && (env.GITHUB_BRANCH == 'master' || env.GITHUB_BRANCH == 'dev')
+        if: env.TEST_FAIL == 'FALSE' && (env.GITHUB_BRANCH == 'master' || env.GITHUB_BRANCH == 'ely')
         working-directory: ${{ env.RUNNER_WORKSPACE }}
         shell: bash
         run: |
