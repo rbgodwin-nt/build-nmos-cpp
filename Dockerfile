@@ -31,7 +31,7 @@ RUN cd /home && mkdir certs && git config --global http.sslVerify false && \
 # RUN cd /home/ && curl --output - -s -k https://codeload.github.com/sony/nmos-cpp/tar.gz/$NMOS_CPP_VERSION | tar zxvf - -C . && \
 #     mv ./nmos-cpp-${NMOS_CPP_VERSION} ./nmos-cpp
 
-RUN cd /home && git clone https://github.com/rbgodwin-nt/nmos-cpp.git
+RUN cd /home && git clone -b ely https://github.com/rbgodwin-nt/nmos-cpp.git 
 
 ## You should use either Avahi or Apple mDNS - DO NOT use both
 ##
