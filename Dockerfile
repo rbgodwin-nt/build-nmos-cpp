@@ -28,7 +28,7 @@ RUN cd /home && mkdir certs && git config --global http.sslVerify false && \
 
 ## Get source for Sony nmos-cpp
 ## Commit 0fb6b51 corresponds to Conan package nmos-cpp/cci.20221203
-ENV NMOS_CPP_VERSION=0fb6b51737f737ae011cbcc39cdfb2c5236ec59f
+ENV NMOS_CPP_VERSION=17f1b8b3194f47d81b0be614276be96ade81b760
 RUN cd /home/ && curl --output - -s -k https://codeload.github.com/sony/nmos-cpp/tar.gz/$NMOS_CPP_VERSION | tar zxvf - -C . && \
     mv ./nmos-cpp-${NMOS_CPP_VERSION} ./nmos-cpp
 
