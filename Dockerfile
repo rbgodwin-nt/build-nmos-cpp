@@ -18,7 +18,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get install -
     apt-get autoclean -y --no-install-recommends
 
 ## Install latest versions of CMake and Conan using pip3 package installer
-RUN python3 -m pip install --upgrade pip setuptools wheel cmake conan==1.59.0
+RUN python3 -m pip install --upgrade pip setuptools wheel cmake conan~=1.47
 
 ## Get Certificates and scripts from AMWA-TV/nmos-testing
 RUN cd /home && mkdir certs && git config --global http.sslVerify false && \
@@ -26,10 +26,6 @@ RUN cd /home && mkdir certs && git config --global http.sslVerify false && \
     mv /home/nmos-testing/test_data/BCP00301/ca/* /home/certs && \
     rm -rf /home/nmos-testing
 
-## Get source for Sony nmos-cpp from working fork/
-# ENV NMOS_CPP_VERSION=287048d5121aca30e01125d89dbea463787e19a5
-# RUN cd /home/ && curl --output - -s -k https://codeload.github.com/sony/nmos-cpp/tar.gz/$NMOS_CPP_VERSION | tar zxvf - -C . && \
-#     mv ./nmos-cpp-${NMOS_CPP_VERSION} ./nmos-cpp
 
 RUN cd /home && git clone -b ely https://github.com/rbgodwin-nt/nmos-cpp.git 
 
@@ -72,7 +68,9 @@ RUN cd /home/ && mkdir example-conf && mkdir admin
 ADD example-conf /home/example-conf
 
 ## Get and build source for Sony nmos-js
-RUN cd /home/ && git config --global http.sslVerify false && git clone https://github.com/sony/nmos-js.git
+ENV NMOS_JS_VERSION=41fb6819231ff9c4ffc74a6bd5b285e21e964a21
+RUN cd /home/ && curl --output - -s -k https://codeload.github.com/sony/nmos-js/tar.gz/$NMOS_JS_VERSION | tar zxvf - -C . && \
+    mv ./nmos-js-${NMOS_JS_VERSION} ./nmos-js
 
 ## Custom branding
 COPY NVIDIA_Logo_H_ForScreen_ForLightBG.png nmos-js.patch /home/nmos-js/Development/src/assets/
