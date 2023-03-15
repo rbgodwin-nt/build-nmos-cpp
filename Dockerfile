@@ -26,11 +26,8 @@ RUN cd /home && mkdir certs && git config --global http.sslVerify false && \
     mv /home/nmos-testing/test_data/BCP00301/ca/* /home/certs && \
     rm -rf /home/nmos-testing
 
-## Get source for Sony nmos-cpp
-## Commit 17f1b8b is newer than Conan package nmos-cpp/cci.20221203
-ENV NMOS_CPP_VERSION=17f1b8b3194f47d81b0be614276be96ade81b760
-RUN cd /home/ && curl --output - -s -k https://codeload.github.com/sony/nmos-cpp/tar.gz/$NMOS_CPP_VERSION | tar zxvf - -C . && \
-    mv ./nmos-cpp-${NMOS_CPP_VERSION} ./nmos-cpp
+## Get source for Sony nmos-cpp from forked repo
+RUN cd /home && git clone -b ely https://github.com/rbgodwin-nt/nmos-cpp.git 
 
 ## You should use either Avahi or Apple mDNS - DO NOT use both
 ##
